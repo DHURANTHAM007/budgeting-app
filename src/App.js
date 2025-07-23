@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'; // Your custom styles
+import './App.css'; 
+
 import Budget from './components/Budget';
 import Remaining from './components/Remaining';
 import Spent from './components/Spent';
@@ -10,22 +11,22 @@ import AddExpenseForm from './components/AddExpenseForm';
 const App = () => {
     // --- State Initialization with Local Storage ---
     const [budget, setBudget] = useState(() => {
-        const savedBudget = localStorage.getItem('budget');
+        const savedBudget = localStorage.getItem('budget-app-budget');
         return savedBudget ? JSON.parse(savedBudget) : 2000;
     });
 
     const [expenses, setExpenses] = useState(() => {
-        const savedExpenses = localStorage.getItem('expenses');
+        const savedExpenses = localStorage.getItem('budget-app-expenses');
         return savedExpenses ? JSON.parse(savedExpenses) : [];
     });
 
     // --- Effects for Local Storage Persistence ---
     useEffect(() => {
-        localStorage.setItem('budget', JSON.stringify(budget));
+        localStorage.setItem('budget-app-budget', JSON.stringify(budget));
     }, [budget]);
 
     useEffect(() => {
-        localStorage.setItem('expenses', JSON.stringify(expenses));
+        localStorage.setItem('budget-app-expenses', JSON.stringify(expenses));
     }, [expenses]);
 
     // --- State Handler Functions ---
@@ -46,7 +47,7 @@ const App = () => {
 
     return (
         <div className='container mt-4'>
-            <h1 className='mt-3'>FinTrack Budget Planner</h1>
+            <h1 className='mt-3'>My Budget Planner</h1>
             <div className='row mt-3'>
                 <div className='col-sm'>
                     <Budget budget={budget} handleSaveBudget={handleSaveBudget} />
