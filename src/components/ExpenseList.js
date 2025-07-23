@@ -1,35 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ExpenseItem from './ExpenseItem';
 
-const ExpenseList = ({ expenses, onDelete }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredExpenses = expenses.filter((expense) =>
-    expense.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <div>
-      <input
-        type='text'
-        className='form-control mb-4'
-        placeholder='Type to search expenses...'
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <ul className='list-group'>
-        {filteredExpenses.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            id={expense.id}
-            name={expense.name}
-            cost={expense.cost}
-            onDelete={onDelete}
-          />
-        ))}
-      </ul>
-    </div>
-  );
+const ExpenseList = ({ expenses, handleDeleteExpense }) => {
+    return (
+        <ul className='list-group'>
+            {expenses.map((expense) => (
+                <ExpenseItem
+                    key={expense.id}
+                    id={expense.id}
+                    name={expense.name}
+                    cost={expense.cost}
+                    handleDeleteExpense={handleDeleteExpense}
+                />
+            ))}
+        </ul>
+    );
 };
 
 export default ExpenseList;
