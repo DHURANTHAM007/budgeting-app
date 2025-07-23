@@ -7,6 +7,9 @@ const AddExpenseForm = ({ handleAddExpense }) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        
+        if (name.trim() === '' || cost.trim() === '') return;
+
         const expense = {
             id: uuidv4(),
             name: name,
@@ -14,6 +17,8 @@ const AddExpenseForm = ({ handleAddExpense }) => {
         };
 
         handleAddExpense(expense);
+
+        // Reset form fields
         setName('');
         setCost('');
     };
@@ -21,22 +26,24 @@ const AddExpenseForm = ({ handleAddExpense }) => {
     return (
         <form onSubmit={onSubmit}>
             <div className='row'>
-                <div className='col-sm'>
-                    <label>Name</label>
+                <div className='col-sm col-lg-4'>
+                    <label htmlFor='name'>Name</label>
                     <input
                         required='required'
                         type='text'
                         className='form-control'
+                        id='name'
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                     ></input>
                 </div>
-                <div className='col-sm'>
-                    <label>Cost</label>
+                <div className='col-sm col-lg-4'>
+                    <label htmlFor='cost'>Cost</label>
                     <input
                         required='required'
                         type='number'
                         className='form-control'
+                        id='cost'
                         value={cost}
                         onChange={(event) => setCost(event.target.value)}
                     ></input>
